@@ -1,0 +1,3 @@
+# Creating directories to store your data
+mkdir Project
+cd project
