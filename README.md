@@ -197,7 +197,10 @@ Stress/adaptation factors: _clp family, bsh, oatA, pdgA, prsA2_.
 
 # SUMMARY
 ✅ 60 samples were provided but after quality control only 48 samples were viable for WGS
+
 ✅ Work flow: Fastqc ➡️ Fastp ➡️ SPAdes ➡️ QUAST ➡️ ABRicate ➡️ ABRicate (VFDB)
+
 ✅ Resiistant genes foxp and lmo0919_fam were found indicating fosfomycin and linomycin resistance.
+
 ✅ Public health concerns: High virulence genes and toxin genes explain severe neonatal infections and surveilance and outbreak control methods are critical.
 
