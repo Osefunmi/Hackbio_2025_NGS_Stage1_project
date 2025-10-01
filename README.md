@@ -134,7 +134,7 @@ I used a bash script to combine the quast reports
 `mkdir quast_combined`
 `quast.py assemblies/*.fasta -o quast_combined`
 
-## Step 6: Antimcrobial resistance DETECTION (ABRicate)
+## Step 6: Antimcrobial resistance detection (ABRicate)
 
 `nano abricate.sh`
 
@@ -163,7 +163,7 @@ done
 
 `bash abricate.sh`
 
-This gives result for each sample and a summary of everything in a file. From our abricate reports summary we see the antimicrobial resistant gene present and the percentage coverage and identity. Genes with >90% are considered as being present and pronounced. This indicates that both antibiotics can not be used in treatment.We saw Fosfomycin and linomycin with genes fosx and lmo0919_fam respectively. Research has shown that the  first line therapy for _Listeria monocytogenes_ is typically ampicillin (amoxicillin) with or without gentamicin. Since there is no resistance to this gene, we can suggest this as our treatment.
+This gives result for each sample and a summary of everything in a file. From our abricate reports summary we see the antimicrobial resistant gene present and the percentage coverage and identity. Genes with >90% are considered as being present and pronounced. This indicates that both antibiotics can not be used in treatment.We saw Fosfomycin and linomycin with genes fosx and lmo0919_fam respectively. Research has shown that the  first line therapy for _Listeria monocytogenes_ is typically ampicillin (amoxicillin) with or without gentamicin. Since there is no resistance to this gene, we can suggest this as our treatment. For patients allergic to betalactams, Trimethoprim-sulfamethoxazole (TMP-SMX) is an alternative.
 
 
 ## Step 7: Toxin screening.
@@ -175,15 +175,29 @@ compile all results in a .txt format
 
 `abricate --summary abricate_vfdb_results.tab > abricate_vfdb_summary.txt`
 
-There were various toxins and virulent factors present in the samples and at different percentages. The major classical toxins among others were:
+There were various toxins and virulent factors present in the samples and at different percentages (>90%). The major classical toxins among others were:
 
-hly (listeriolysin O) → pore-forming toxin, key for escaping the phagosome.
+_hly_ (listeriolysin O) → pore-forming toxin, key for escaping the phagosome.
 
-plcA, plcB (phospholipases) → break down host cell membranes, helping escape & spread.
+_plcA, plcB_ (phospholipases) → break down host cell membranes, helping escape & spread.
 
-llsA–llsY (Listeriolysin S operon) → produces a bacteriocin-like peptide Listeriolysin S, thought to increase virulence and help survival in the gut.
+_llsA–llsY_ (Listeriolysin S operon) → produces a bacteriocin-like peptide Listeriolysin S, thought to increase virulence and help survival in the gut.
 
-iap/cwhA (invasion-associated protein, autolysin) → helps with adhesion and invasion, sometimes linked to toxin-like cell wall activity.
+_iap/cwhA_ (invasion-associated protein, autolysin) → helps with adhesion and invasion, sometimes linked to toxin-like cell wall activity.
 
-mpl (metalloprotease) → activates PlcB toxin.
+_mpl_ (metalloprotease) → activates PlcB toxin.
+
+Other virulence genes found include:
+Invasion & spread proteins: internalins _(inlA–inlK), actA, lap_.
+
+Regulators: _prfA_.
+
+Stress/adaptation factors: _clp family, bsh, oatA, pdgA, prsA2_.
+
+
+# SUMMARY
+✅ 60 samples were provided but after quality control only 48 samples were viable for WGS
+✅ Work flow: Fastqc ➡️ Fastp ➡️ SPAdes ➡️ QUAST ➡️ ABRicate ➡️ ABRicate (VFDB)
+✅ Resiistant genes foxp and lmo0919_fam were found indicating fosfomycin and linomycin resistance.
+✅ Public health concerns: High virulence genes and toxin genes explain severe neonatal infections and surveilance and outbreak control methods are critical.
 
