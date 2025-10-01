@@ -132,7 +132,7 @@ I used a bash script to combine the quast reports
 `mkdir quast_combined`
 `quast.py assemblies/*.fasta -o quast_combined`
 
-## Step 6: Antimcrobial resistance using (Abricate)
+## Step 6: Antimcrobial resistance DETECTION (ABRicate)
 
 `nano abricate.sh`
 
@@ -164,4 +164,11 @@ done
 This gives result for each sample and a summary of everything in a file. From our abricate reports summary we see the antimicrobial resistant gene present and the percentage coverage and identity. Genes with >90% are considered as being present and pronounced. We saw Fosfomycin and linomycin
 
 
+## Step 7: Toxin screening.
+We screen for virulence factoes with VFD in abricate
 
+`abricate --db vfdb assemblies/*.fasta > abricate_vfdb_results.tab`
+
+compile all results in a .txt format
+
+`abricate --summary abricate_vfdb_results.tab > abricate_vfdb_summary.txt`
