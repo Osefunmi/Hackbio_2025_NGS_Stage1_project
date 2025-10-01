@@ -18,15 +18,15 @@ Suggest antibiotics/treatment options that could be used managing the cases
 `bash SA_Polony_100_download.sh`
 
 ## Step 2: Quality control and combinig qc report
-We ran FastQC on all raw reads to assess quality.
+I ran FastQC on all raw reads to assess quality.
 
 `fastqc raw_data/*.fastq.gz -o qc_reports/`
 
-We combined all qc report using multiqc
+I combined all qc report using multiqc
 
 `multiqc qc_reports`
 
-We open the multiqc html file showing a combined report. We look out for good quality of our data and delete those with poor quality from our raw data set. we also delete all data without both the forward and backward sequences.
+I opened the multiqc html file showing a combined report. I looked out for good quality of our data and delete those with poor quality from our raw data set. we also delete all data without both the forward and backward sequences.
 
 ## Step 3: Trimming
 We trimmed adapters and low-quality reads using fastp. first we created a sh document to run through bash
@@ -86,7 +86,7 @@ done
 
 `bash spades.sh`
 
-we combined our contigs.fasta into a folder so we can run futher steps easily
+I combined our contigs.fasta into a folder so I can run futher steps easily
 
 `nano compile.sh`
 
@@ -103,6 +103,8 @@ for d in spades_output/*; do
     fi
 done
 ```
+
+I downloded the contigs.fasta file then copied the nucleotides into the NCBI BLAST site (https://blast.ncbi.nlm.nih.gov/Blast.cgi?PROGRAM=blastn&PAGE_TYPE=BlastSearch&BLAST_SPEC=&LINK_LOC=blasttab&LAST_PAGE=tblastn). This gives the closest organism and percentage of similarity between the genomes. There was strong similarity between our samples and _Listeria monocytogenes_ . The predominant strains were FDA00006667, FDA00009448, BL88/034, BL88/097 and 11-04869. One sample had a stron similarity to the _Listeria _ phage LP-030-2 suggesting a lysogenic relationship considering that this sample also had about 98% similarity to the organism.
 
 ## Step 5: Evaluating my Assembly (QUAST)
 I evaluated my assembly using quast
@@ -161,7 +163,7 @@ done
 
 `bash abricate.sh`
 
-This gives result for each sample and a summary of everything in a file. From our abricate reports summary we see the antimicrobial resistant gene present and the percentage coverage and identity. Genes with >90% are considered as being present and pronounced. We saw Fosfomycin and linomycin
+This gives result for each sample and a summary of everything in a file. From our abricate reports summary we see the antimicrobial resistant gene present and the percentage coverage and identity. Genes with >90% are considered as being present and pronounced. This indicates that both antibiotics can not be used in treatment.We saw Fosfomycin and linomycin with genes fosx and lmo0919_fam respectively. Research has shown that the  first line therapy for _Listeria monocytogenes_ is typically ampicillin (amoxicillin) with or without gentamicin. Since there is no resistance to this gene, we can suggest this as our treatment.
 
 
 ## Step 7: Toxin screening.
@@ -172,3 +174,16 @@ We screen for virulence factoes with VFD in abricate
 compile all results in a .txt format
 
 `abricate --summary abricate_vfdb_results.tab > abricate_vfdb_summary.txt`
+
+There were various toxins and virulent factors present in the samples and at different percentages. The major classical toxins among others were:
+
+hly (listeriolysin O) → pore-forming toxin, key for escaping the phagosome.
+
+plcA, plcB (phospholipases) → break down host cell membranes, helping escape & spread.
+
+llsA–llsY (Listeriolysin S operon) → produces a bacteriocin-like peptide Listeriolysin S, thought to increase virulence and help survival in the gut.
+
+iap/cwhA (invasion-associated protein, autolysin) → helps with adhesion and invasion, sometimes linked to toxin-like cell wall activity.
+
+mpl (metalloprotease) → activates PlcB toxin.
+
